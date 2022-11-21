@@ -1,0 +1,182 @@
+[
+    {
+        "routeid": "GMB190-110",
+        "routeno": "190-1",
+        "startnodenm": "봉곡청마루출발지(종점)",
+        "endnodenm": "옥계이편한세상APT앞"
+    },
+    {
+        "routeid": "GMB190-210",
+        "routeno": "190-2",
+        "startnodenm": "원호대우아파트건너",
+        "endnodenm": "옥계이편한세상APT앞"
+    },
+    {
+        "routeid": "GMB190-310",
+        "routeno": "190-3",
+        "startnodenm": "구미역",
+        "endnodenm": "금오공대종점"
+    },
+    {
+        "routeid": "GMB190-320",
+        "routeno": "190-3",
+        "startnodenm": "금오공대종점",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB19010",
+        "routeno": "190",
+        "startnodenm": "구미역",
+        "endnodenm": "옥계이편한세상APT앞"
+    },
+    {
+        "routeid": "GMB19020",
+        "routeno": "190",
+        "startnodenm": "옥계이편한세상APT앞",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB19110",
+        "routeno": "191",
+        "startnodenm": "구미역",
+        "endnodenm": "옥계이편한세상APT앞"
+    },
+    {
+        "routeid": "GMB19120",
+        "routeno": "191",
+        "startnodenm": "옥계이편한세상APT앞",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB19210",
+        "routeno": "192",
+        "startnodenm": "구미역",
+        "endnodenm": "해평버스정류장"
+    },
+    {
+        "routeid": "GMB19220",
+        "routeno": "192",
+        "startnodenm": "해평버스정류장",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB193-210",
+        "routeno": "193-2",
+        "startnodenm": "구미역",
+        "endnodenm": "장천버스터미널 종점"
+    },
+    {
+        "routeid": "GMB193-220",
+        "routeno": "193-2",
+        "startnodenm": "장천버스터미널 종점",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB19310",
+        "routeno": "193",
+        "startnodenm": "구미역",
+        "endnodenm": "장천버스터미널 종점"
+    },
+    {
+        "routeid": "GMB19320",
+        "routeno": "193",
+        "startnodenm": "장천버스터미널 종점",
+        "endnodenm": "구미역(중앙시장"
+    },
+    {
+        "routeid": "GMB19510",
+        "routeno": "195",
+        "startnodenm": "구미역",
+        "endnodenm": "아사히글라스앞"
+    },
+    {
+        "routeid": "GMB19520",
+        "routeno": "195",
+        "startnodenm": "아사히글라스건너",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB19610",
+        "routeno": "196",
+        "startnodenm": "구미역",
+        "endnodenm": "경운대학교(구미운전면허센터)"
+    },
+    {
+        "routeid": "GMB19620",
+        "routeno": "196",
+        "startnodenm": "경운대학교(구미운전면허센터)",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB520010",
+        "routeno": "5200",
+        "startnodenm": "김천시외버스터미널(종점)",
+        "endnodenm": "양포동행정복지센터건너"
+    },
+    {
+        "routeid": "GMB520020",
+        "routeno": "5200",
+        "startnodenm": "양포동행정복지센터",
+        "endnodenm": "김천시외버스터미널 종점"
+    },
+    {
+        "routeid": "GMB55710",
+        "routeno": "557",
+        "startnodenm": "김천시외버스터미널(종점)",
+        "endnodenm": "금오공대종점"
+    },
+    {
+        "routeid": "GMB55720",
+        "routeno": "557",
+        "startnodenm": "금오공대종점",
+        "endnodenm": "김천시외버스터미널 종점"
+    },
+    {
+        "routeid": "GMB5710",
+        "routeno": "57",
+        "startnodenm": "김천시외버스터미널(종점)",
+        "endnodenm": "금오공대종점"
+    },
+    {
+        "routeid": "GMB5720",
+        "routeno": "57",
+        "startnodenm": "금오공대종점",
+        "endnodenm": "김천시외버스터미널 종점"
+    },
+    {
+        "routeid": "GMB5721",
+        "routeno": "57",
+        "startnodenm": "금오공대종점",
+        "endnodenm": "김천시외버스터미널 종점"
+    },
+    {
+        "routeid": "GMB89010",
+        "routeno": "890",
+        "startnodenm": "구미역",
+        "endnodenm": "해평버스정류장"
+    },
+    {
+        "routeid": "GMB89020",
+        "routeno": "890",
+        "startnodenm": "해평버스정류장",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB891-220",
+        "routeno": "891-2",
+        "startnodenm": "옥계대백타운 출발지",
+        "endnodenm": "구미역(중앙시장)"
+    },
+    {
+        "routeid": "GMB90010",
+        "routeno": "900",
+        "startnodenm": "구미역",
+        "endnodenm": "아사히글라스앞"
+    },
+    {
+        "routeid": "GMB90020",
+        "routeno": "900",
+        "startnodenm": "아사히글라스건너",
+        "endnodenm": "구미역(중앙시장)"
+    }
+]
