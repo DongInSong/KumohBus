@@ -1,4 +1,3 @@
-const API = "http://localhost:8000";
-export const bus = `${API}/bus`;
-export const busStop = `${API}/busStop`;
-export const busArrival = `${API}/Arrival`;
+const API = "https://kumohbus.herokuapp.com";
+export const busStop = `${API}/busstop/`;
+export const buslocation = `${API}/buslocation/`;

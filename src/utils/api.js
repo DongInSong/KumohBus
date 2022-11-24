@@ -1,4 +1,4 @@
-import axios from "axios";
+import { busStop, buslocation } from "config/api"
 
 // 내림차순 정렬
 function compareBy_DESC(key) {
@@ -14,12 +14,10 @@ function compareBy_DESC(key) {
 
 export const getArrivalData = async (nodeId) => {
   try {
-    const url = 'http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?ServiceKey=btg61%2BH2BcIymonQ260mu2Q1kkjD0WBSsdTdDScJd8OunwmGJvImYug6yIvJpZr%2BZ1oUsXYCLNZ5AXXzhvo9sQ%3D%3D&pageNo=1&numOfRows=100&cityCode=37050&nodeId=' + nodeId + '&_type=json';
-    const { data } = await axios.get(url);
-    let res = data;
-
-    const totalCount = res.response.body.totalCount; // 도착 버스 수
-    const newRes = res.response.body.items.item; // 도착 정보 영역
+    const res = await fetch(`${busStop}` + nodeId);
+    const resJson = await res.json();
+    const totalCount = resJson.data.response.body.totalCount; // 도착 버스 수
+    const newRes = resJson.data.response.body.items.item; // 도착 정보 영역
     console.log(totalCount);
 
     // 버스 1대 도착시 임시 배열로 생성 후 setData
@@ -49,11 +47,9 @@ export const getArrivalData = async (nodeId) => {
 export const getTotalBus = async (routeid) =>{
   let totalCount = 0;
   try {
-    const url = 'http://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?ServiceKey=btg61%2BH2BcIymonQ260mu2Q1kkjD0WBSsdTdDScJd8OunwmGJvImYug6yIvJpZr%2BZ1oUsXYCLNZ5AXXzhvo9sQ%3D%3D&pageNo=1&numOfRows=100&cityCode=37050&routeId=' + routeid + '&_type=json';
-    const { data } = await axios.get(url);
-    let res = data;
-
-    totalCount = res.response.body.totalCount; // 운행 버스 수
+    const res = await fetch(`${buslocation}` + routeid);
+    const resJson = await res.json();
+    totalCount = resJson.data.response.body.totalCount; // 운행 버스 수
   }
   catch (e) {
     console.log(e);
@@ -63,12 +59,10 @@ export const getTotalBus = async (routeid) =>{
 
 export const getLocation = async (routeid) => {
   try {
-    const url = 'http://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?ServiceKey=btg61%2BH2BcIymonQ260mu2Q1kkjD0WBSsdTdDScJd8OunwmGJvImYug6yIvJpZr%2BZ1oUsXYCLNZ5AXXzhvo9sQ%3D%3D&pageNo=1&numOfRows=100&cityCode=37050&routeId=' + routeid + '&_type=json';
-    const { data } = await axios.get(url);
-    let res = data;
-
-    const totalCount = res.response.body.totalCount; // 운행 버스 수
-    const newRes = res.response.body.items.item; // 정보 영역
+    const res = await fetch(`${buslocation}` + routeid);
+    const resJson = await res.json();
+    const totalCount = resJson.data.response.body.totalCount; // 운행 버스 수
+    const newRes = resJson.data.response.body.items.item; // 정보 영역
     console.log(totalCount);
 
     // 버스 1대 운행시 임시 배열로 생성 후 setData
