@@ -1,10 +1,22 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 //screens
 import Bus from 'screens/Bus/index';
+import Kumoh from 'screens/Bus/kumoh';
+import GumiStn from 'screens/Bus/gumiStn';
 
 const Stack = createStackNavigator();
+const topTab = createMaterialTopTabNavigator();
+const Tabs = () => {
+  return (
+    <topTab.Navigator>
+      <topTab.Screen name="금오공대" component={Kumoh} />
+      <topTab.Screen name="구미역" component={GumiStn} />
+    </topTab.Navigator>
+  );
+};
 export default function Index() {
   return (
     <Stack.Navigator>
@@ -24,8 +36,9 @@ export default function Index() {
           },
         }}
         name="Bus"
-        component={Bus}
+        component={Tabs}
       />
+
     </Stack.Navigator>
   );
 }

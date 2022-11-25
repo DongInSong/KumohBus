@@ -1,14 +1,6 @@
-import React, {useRef} from 'react';
-import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import CompleteFlatList from 'utils/CompleteFlatList'
-import { CardViewWithIcon } from 'react-native-simple-card-view'
+const Index = ({ navigation }) => {
+ const { kakao } = document.write("<script src='//dapi.kakao.com/v2/maps/sdk.js?appkey=4e183603a64e7954cf3054bf5bd15786'></script>");
 
+}
 
-const App = () => {
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-    </SafeAreaView>
-  );
-};
-
-export default App;
+export default Index;

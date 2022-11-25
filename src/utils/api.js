@@ -1,4 +1,5 @@
-import { busStop, buslocation } from "config/api"
+import { busstop, busStopArrival, buslocation, kakaomap } from "config/api"
+import DOMParser from 'react-native-html-parser';
 
 // 내림차순 정렬
 function compareBy_DESC(key) {
@@ -14,7 +15,7 @@ function compareBy_DESC(key) {
 
 export const getArrivalData = async (nodeId) => {
   try {
-    const res = await fetch(`${busStop}` + nodeId);
+    const res = await fetch(`${busStopArrival}` + nodeId);
     const resJson = await res.json();
     const totalCount = resJson.data.response.body.totalCount; // 도착 버스 수
     const newRes = resJson.data.response.body.items.item; // 도착 정보 영역
@@ -44,7 +45,7 @@ export const getArrivalData = async (nodeId) => {
   }
 };
 
-export const getTotalBus = async (routeid) =>{
+export const getTotalBus = async (routeid) => {
   let totalCount = 0;
   try {
     const res = await fetch(`${buslocation}` + routeid);
@@ -55,7 +56,7 @@ export const getTotalBus = async (routeid) =>{
     console.log(e);
   }
   return totalCount;
-}
+};
 
 export const getLocation = async (routeid) => {
   try {
@@ -87,3 +88,18 @@ export const getLocation = async (routeid) => {
     console.log(e);
   }
 };
+
+export const kakaoMapLoader = async () => {
+  try {
+
+  //   let a = await fetch(`${kakaomap}`)
+  //   .then(response => response.text())
+  //  .then((response) => {
+  //      console.log(response)
+  //  })
+  //  .catch(err => console.log(err))
+  }
+  catch (e) {
+    console.log(e);
+  }
+}

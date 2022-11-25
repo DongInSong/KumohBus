@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { StyleSheet, TextInput, View, Text, Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
-import BusStopData from 'config/busStop_test.json';
+import { busStop } from 'config/api';
 import Bookmark from '../../components/Bookmark';
 
 
@@ -12,24 +12,28 @@ const Index = ({ navigation }) => {
   const searchRef = useRef();
 
   const searchData = async (text) => {
+    if(text){
     try {
       setSearchVal(text);
-      const res = await fetch('http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList?serviceKey=btg61%2BH2BcIymonQ260mu2Q1kkjD0WBSsdTdDScJd8OunwmGJvImYug6yIvJpZr%2BZ1oUsXYCLNZ5AXXzhvo9sQ%3D%3D&pageNo=1&numOfRows=2500&type=json&cityCode=37050', {
+      const res = await fetch(`${busStop}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          "res.response.body.items.item.nodenm": text,
+          "keyword": text,
         }),
       });
       const resJson = await res.json();
-      const newRes = resJson.response.body.items.item;
+      console.log(resJson);
+      const newRes = resJson.data;
       console.log(newRes);
       setData(newRes);
     } catch (e) {
-      console.log("패치 x");
+      console.log(e);
     }
+  }
+  else setData();
   };
 
   const renderItem = useCallback(({ item }) => <TouchableOpacity onPress={() => navigation.navigate('Result', { nodeid: item.nodeid, nodenm: item.nodenm })}/*ref.current.clearSearch()*/ >
@@ -61,7 +65,7 @@ const Index = ({ navigation }) => {
       </View>
 
       <FlatList
-        data={BusStopData}
+        data={data}
         renderItem={renderItem}
         initialNumToRender={10}
         removeClippedSubviews={true}
