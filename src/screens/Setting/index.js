@@ -63,6 +63,7 @@ const Index = () => {
             javaScriptEnabled={true}
             domStorageEnabled={true}
             startInLoadingState={true}
+            style={styles.container}
           />
         </ScrollView>
       </View>
@@ -104,6 +105,7 @@ const Index = () => {
   );
 }
 export default Index;
+
 
 const styles = StyleSheet.create({
   container: {
