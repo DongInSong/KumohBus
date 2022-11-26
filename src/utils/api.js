@@ -92,12 +92,16 @@ export const getLocation = async (routeid) => {
 export const kakaoMapLoader = async () => {
   try {
 
-  //   let a = await fetch(`${kakaomap}`)
+   const res = await fetch(`${kakaomap}`);
+   const resText = await res.text();
+   return resText;
   //   .then(response => response.text())
   //  .then((response) => {
-  //      console.log(response)
+  //     console.log(response);
+  //      return response;
   //  })
   //  .catch(err => console.log(err))
+
   }
   catch (e) {
     console.log(e);

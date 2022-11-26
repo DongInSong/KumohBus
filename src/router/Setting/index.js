@@ -22,6 +22,7 @@ export default function Index() {
                       fontWeight: 'bold',
                       fontSize: 20,
                     },
+                    unmountOnBlur: true
                   }}
                 name="Setting"
                 component={Setting}
