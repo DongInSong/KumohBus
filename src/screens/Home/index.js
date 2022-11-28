@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -46,7 +46,7 @@ const Index = ({ navigation }) => {
                 <FlatList
                     data={busBookmarkData}
                     renderItem={({ item }) =>
-                        <TouchableOpacity onPress={() => console.log(item.routeno)}/*ref.current.clearSearch()*/ >
+                        <TouchableOpacity onPress={() => {console.log(item.routeno); setAlarmTime()}} >
                             <View style={styles.row}>
 
                                 {/* 아이콘 */}

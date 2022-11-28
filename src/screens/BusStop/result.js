@@ -6,6 +6,7 @@ import { FlatList } from "react-native-gesture-handler";
 import routeData from 'config/route.json';
 import Alarm from 'components/Alarm';
 
+
 const Result = ({ route }) => {
     const { nodeid } = route?.params || {};
     const { nodenm } = route?.params || {};
