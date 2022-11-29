@@ -78,7 +78,11 @@ const Result = ({ route }) => {
                             </Text>
 
                             {/* 즐겨찾기 버튼 */}
-                            <Alarm></Alarm>
+                            <Alarm routeno = {item.routeno}
+                            arrtime = {item.arrtime}
+                            nodeid = {nodeid}
+                            routeid = {item.routeid}
+                            ></Alarm>
                         </View>
                     </TouchableOpacity>
                 }

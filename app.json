@@ -4,10 +4,14 @@
     "slug": "KumohBus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icons/icon.png",
+    "icon": "./src/assets/icons/blue_bus.png",
     "userInterfaceStyle": "light",
+    "notification": {
+      "icon": "./src/assets/icons/blue_bus.png",
+      "color": "#fff"
+    },
     "splash": {
-      "image": "./src/assets/icons/splash.png",
+      "image": "./src/assets/icons/blue_bus.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
