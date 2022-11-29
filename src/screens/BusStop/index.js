@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { StyleSheet, TextInput, View, Text, Image, SafeAreaView, TouchableOpacity } from 'react-native';
+import { TextInput, View, Text, Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
-import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { busStop } from 'config/api';
 import Bookmark from '../../components/Bookmark';
+import style from 'styles/Style';
 
 
 const Index = ({ navigation }) => {
@@ -37,15 +38,15 @@ const Index = ({ navigation }) => {
   };
 
   const renderItem = useCallback(({ item }) => <TouchableOpacity onPress={() => navigation.navigate('Result', { nodeid: item.nodeid, nodenm: item.nodenm })}/*ref.current.clearSearch()*/ >
-    <View style={styles.row}>
+    <View style={style.row}>
 
       {/* 아이콘 */}
-      <View style={styles.iconContainer}>
+      <View style={style.iconContainer_busstop}>
         <MaterialCommunityIcons name={"bus-stop"} size={40} color='#77dd77' />
       </View>
 
       {/* 텍스트 */}
-      <Text style={styles.text}>{item.nodenm}</Text>
+      <Text style={style.text_busstop}>{item.nodenm}</Text>
 
       {/* 즐겨찾기 버튼 */}
       <Bookmark data = {{item, key:"busStopBookmarkData"}}/>
@@ -54,9 +55,9 @@ const Index = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-      <View style = {styles.inputScreen}>
+      <View style = {style.inputScreen}>
         <TextInput
-          style={styles.textInput}
+          style={style.textInput}
           ref={searchRef}
           placeholder="정류장을 검색하세요."
           onChangeText={(text) => searchData(text)}
@@ -75,64 +76,4 @@ const Index = ({ navigation }) => {
 };
 
 export default Index;
-
-const styles = StyleSheet.create({
-  TouchableOpacityStyle: {
-    position: 'absolute',
-    width: 10,
-    height: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 30,
-    bottom: 30,
-  },
-
-  FloatingButtonStyle: {
-    resizeMode: 'contain',
-    width: 40,
-    height: 40,
-  },
-
-  text: {
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontSize: 15,
-  },
-
-  inputScreen: {
-    paddingVertical: 10,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#29b6f6",
-  },
-
-  textInput: {
-    width: "95%",
-    height: 40,
-    backgroundColor: '#fff',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 15, 
-    fontSize: 16,
-},
-
-  iconContainer: {
-    // backgroundColor: '#77dd77',
-    padding: 7,
-    borderRadius: 10,
-    marginLeft: 10,
-    marginRight: 15,
-  },
-
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderColor: 'lightgrey',
-  },
-});
 

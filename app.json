@@ -4,14 +4,14 @@
     "slug": "KumohBus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icons/blue_bus.png",
+    "icon": "./src/assets/icons/logo_circle.png",
     "userInterfaceStyle": "light",
     "notification": {
       "icon": "./src/assets/icons/blue_bus.png",
       "color": "#fff"
     },
     "splash": {
-      "image": "./src/assets/icons/blue_bus.png",
+      "image": "./src/assets/icons/logo_KIT.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,7 +26,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/icons/adaptive-icon.png",
+        "foregroundImage": "./src/assets/icons/logo_circle.png",
         "backgroundColor": "#FFFFFF"
       }
     },

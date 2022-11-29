@@ -1,5 +1,4 @@
 import { busStopTargetArrival, busStopArrival, buslocation, kakaomap } from "config/api"
-import DOMParser from 'react-native-html-parser';
 
 // 내림차순 정렬
 function compareBy_DESC(key) {

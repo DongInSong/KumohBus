@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import routeData from 'config/route.json';
 import { getLocation } from "utils/api"
 import Bookmark from '../../components/Bookmark';
+import style from 'styles/Style';
 
 const Index = ({ navigation }) => {
   return (
@@ -13,16 +14,16 @@ const Index = ({ navigation }) => {
         data={routeData}
         renderItem={({ item }) =>
           <TouchableOpacity onPress={async () => await getLocation(item.routeid)}/*ref.current.clearSearch()*/ >
-            <View style={styles.row}>
+            <View style={style.row}>
 
               {/* 아이콘 */}
-              <View style={styles.iconContainer}>
+              <View style={style.iconContainer_bus}>
                 <MaterialCommunityIcons name={"bus"} size={35} color={"#77dd77"} /*{getLocation(item.routeid) > 1 ? '#77dd77' : "#FF3D33"}*/ />
               </View>
 
               {/* 텍스트 */}
-              <Text style={styles.title}>{item.routeno + ' 번  '} </Text>
-              <Text style={styles.text}> {item.startnodenm + '\n ' + item.endnodenm}</Text>
+              <Text style={style.title}>{item.routeno + ' 번  '} </Text>
+              <Text style={style.text}> {item.startnodenm + '\n ' + item.endnodenm}</Text>
 
               {/* 즐겨찾기 버튼 */}
               <Bookmark data={{ item, key: "busBookmarkData" }} />
