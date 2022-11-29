@@ -78,11 +78,14 @@ const Result = ({ route }) => {
                             </Text>
 
                             {/* 즐겨찾기 버튼 */}
-                            <Alarm routeno = {item.routeno}
-                            arrtime = {item.arrtime}
-                            nodeid = {nodeid}
-                            routeid = {item.routeid}
-                            ></Alarm>
+                            {(Math.round(item.arrtime / 60)) > 5 &&
+                                <Alarm
+                                    routeno={item.routeno}
+                                    arrtime={item.arrtime}
+                                    nodeid={nodeid}
+                                    routeid={item.routeid}
+                                ></Alarm>
+                            }
                         </View>
                     </TouchableOpacity>
                 }
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginLeft: 15,
         marginRight: 5,
-      },
+    },
     row: {
         flexDirection: 'row',
         alignItems: 'center',
