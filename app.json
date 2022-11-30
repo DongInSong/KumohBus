@@ -4,7 +4,7 @@
     "slug": "KumohBus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icons/logo_circle.png",
+    "icon": "./src/assets/icons/logo_circle.jpg",
     "userInterfaceStyle": "light",
     "notification": {
       "icon": "./src/assets/icons/blue_bus.png",
@@ -26,7 +26,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/icons/logo_circle.png",
+        "foregroundImage": "./src/assets/icons/logo_circle.jpg",
         "backgroundColor": "#FFFFFF"
       }
     },

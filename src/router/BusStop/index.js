@@ -24,6 +24,9 @@ export default function Index() {
             fontWeight: 'bold',
             fontSize: 20,
           },
+          headerTitleContainerStyle: {
+            margin: 10
+          }
         }}
         name="BusStop"
         component={BusStop}

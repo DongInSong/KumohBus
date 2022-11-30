@@ -81,6 +81,19 @@ export const getTotalBus = async (routeid) => {
   return totalCount;
 };
 
+export const getCurrentBus = async (routeid) => {
+  try {
+    const res = await fetch(`${buslocation}` + routeid);
+    const resJson = await res.json();
+    const totalCount = resJson.data.response.body.totalCount; // 운행 버스 수
+    console.log('totalcount: ' + totalCount);
+    return parseInt(totalCount);
+  }
+  catch {
+    return 0;
+  }
+}
+
 export const getLocation = async (routeid) => {
   try {
     const res = await fetch(`${buslocation}` + routeid);

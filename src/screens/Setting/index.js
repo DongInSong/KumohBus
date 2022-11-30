@@ -38,6 +38,7 @@ const Index = () => {
   };
 
   useEffect(() => {
+    // 60초마다 데이터 리로드
     const interval = setInterval(() => setTime(Date.now()), 60000);
     getData();
     return () => {
@@ -70,12 +71,11 @@ const Index = () => {
             javaScriptEnabled={true}
             domStorageEnabled={true}
             startInLoadingState={true}
-            style={style.mapContainer}
           />
         </ScrollView>
       </View>
 
-      <View style={{ flex: 1 }}>
+      <View style={style.bookmark}>
 
         {loading &&
           <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
