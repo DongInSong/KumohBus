@@ -85,7 +85,7 @@ const Index = () => {
           </SafeAreaView>
         }
 
-        {data &&
+        {data && !loading &&
           <FlatList
             data={data}
             extraData={data}

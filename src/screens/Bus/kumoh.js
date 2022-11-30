@@ -6,7 +6,6 @@ import routeData from 'config/route.json';
 import { getCurrentBus, getLocation } from "utils/api"
 import Bookmark from '../../components/Bookmark';
 import style from 'styles/Style';
-import { AndroidImportance } from 'expo-notifications';
 
 const Kumoh = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -69,7 +68,7 @@ const Kumoh = ({ navigation }) => {
         <FlatList
           data={routeData}
           renderItem={({ item }) =>
-            <TouchableOpacity onPress={async () => await getLocation(item.routeid)}/*ref.current.clearSearch()*/ >
+            <TouchableOpacity onPress={() => navigation.navigate('BusRoute', { routeid: item.routeid })}/*ref.current.clearSearch()*/ >
               <View style={style.row}>
                 {/* 아이콘 */}
                 <View style={style.iconContainer_bus}>

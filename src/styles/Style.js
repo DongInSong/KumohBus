@@ -130,6 +130,12 @@ const style = {
         fontWeight: '700',
         color: '#fff',
         textAlign: 'center'
-    }
+    },
+
+    route: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 10,
+    },
 }
 export default style;
