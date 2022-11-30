@@ -1,8 +1,10 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { TextInput, View, Text, Image, SafeAreaView, TouchableOpacity } from 'react-native';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { TextInput, View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { busStop } from 'config/api';
+import * as Animatable from "react-native-animatable";
+import styled from "styled-components";
 import Bookmark from '../../components/Bookmark';
 import style from 'styles/Style';
 
@@ -13,31 +15,48 @@ const Index = ({ navigation }) => {
   const searchRef = useRef();
 
   const searchData = async (text) => {
-    if(text){
-    try {
-      setSearchVal(text);
-      const res = await fetch(`${busStop}`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "keyword": text,
-        }),
-      });
-      const resJson = await res.json();
-      console.log(resJson);
-      const newRes = resJson.data;
-      console.log(newRes);
-      setData(newRes);
-    } catch (e) {
-      console.log(e);
+    if (text) {
+      try {
+        setSearchVal(text);
+        const res = await fetch(`${busStop}`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "keyword": text,
+          }),
+        });
+        const resJson = await res.json();
+        console.log(resJson);
+        const newRes = resJson.data;
+        console.log(newRes);
+        setData(newRes);
+      } catch (e) {
+        console.log(e);
+      }
     }
-  }
-  else setData();
+    else setData();
   };
 
-  const renderItem = useCallback(({ item }) => <TouchableOpacity onPress={() => navigation.navigate('Result', { nodeid: item.nodeid, nodenm: item.nodenm })}/*ref.current.clearSearch()*/ >
+  useEffect(() => {
+    setData();
+}, []);
+
+  const SearchBarWrab = styled.View`
+  position:relative;
+  display: flex;
+  width: 100%;
+  `;
+
+  const Cancel = Animatable.createAnimatableComponent(styled.TouchableOpacity`
+  display: ${({ touch }) => (touch.length > 1 ? "flax" : "none")};
+  padding-left: 300;
+  `)
+
+
+  const renderItem = useCallback(({ item }) => 
+  <TouchableOpacity onPress={() => navigation.navigate('Result', { nodeid: item.nodeid, nodenm: item.nodenm })}/*ref.current.clearSearch()*/ >
     <View style={style.row}>
 
       {/* 아이콘 */}
@@ -49,13 +68,13 @@ const Index = ({ navigation }) => {
       <Text style={style.text_busstop}>{item.nodenm}</Text>
 
       {/* 즐겨찾기 버튼 */}
-      <Bookmark data = {{item, key:"busStopBookmarkData"}}/>
+      <Bookmark data={{ item, key: "busStopBookmarkData" }} />
     </View>
   </TouchableOpacity>, []);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-      <View style = {style.inputScreen}>
+      <View style={style.inputScreen}>
         <TextInput
           style={style.textInput}
           ref={searchRef}
@@ -63,14 +82,37 @@ const Index = ({ navigation }) => {
           onChangeText={(text) => searchData(text)}
           touch={searchVal}
         />
+        {/* <Cancel
+            touch={searchVal}
+            animation={searchVal.length > 1 ? "slideInRight" : false}
+            onPress={() => {
+              searchRef.current.value = "";
+              setSearchVal('');
+              // setData();
+            }}
+          >
+            <Text>취소</Text>
+          </Cancel> */}
       </View>
 
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        initialNumToRender={10}
-        removeClippedSubviews={true}
-      />
+
+      {data &&
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          initialNumToRender={10}
+          removeClippedSubviews={true}
+        />
+      }
+      {!Array.isArray(data) &&
+      <ScrollView
+        contentContainerStyle={style.textContainer}
+      >
+        <Text style={style.emptyData}>검색결과 없음</Text>
+      </ScrollView>
+}
+
+
     </SafeAreaView>
   );
 };
