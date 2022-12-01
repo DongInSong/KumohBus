@@ -1,17 +1,20 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, RefreshControl, SafeAreaView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import style from '/styles/Style';
 import { routeStn } from 'config/api';
+import { getAllLocation } from "utils/api"
 
 const BusRoute = ({ route }) => {
     const { routeid } = route?.params || {};
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(true);
+    const [bus, setBus] = useState();
 
     const getData = async () => {
+        await getBus();
         setLoading(true);
         try {
             const res = await fetch(`${routeStn}`, {
@@ -33,9 +36,35 @@ const BusRoute = ({ route }) => {
         }
     };
 
+    const getBus = async () => {
+        const resBus = await getAllLocation(routeid);
+        if (resBus.totaCount > 0) {
+            const newRes = resBus.items.item;
+            setBus(newRes);
+            console.log(newRes);
+        }
+        else {
+            const empty = { nodeord: 0 };
+            setBus(empty);
+            console.log(empty)
+        }
+    }
+
     useEffect(() => {
         getData();
     }, []);
+
+    // 현재 버스 인덱스로 이동?
+
+    const scroll = () => {
+        if (this.flatListRef.current) {
+            this.flatListRef.current.scrollToIndex({
+                index: 10,
+                animated: true
+            })
+        }
+    }
+
 
     if (loading) {
         return (
@@ -51,12 +80,16 @@ const BusRoute = ({ route }) => {
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <FlatList
                 data={data}
-                renderItem={({ item }) =>
+                // ref={(ref) => { this.flatListRef = ref; }}
+                renderItem={({ item, index }) =>
                     <View style={style.route}>
                         <View style={style.iconContainer_busstop}>
-                            <MaterialCommunityIcons name={"arrow-down-drop-circle-outline"} size={30} />
+                            <MaterialCommunityIcons
+                                name={item.nodeord === bus.nodeord ? "bus" : "arrow-down-drop-circle-outline"}
+                                color={item.nodeord === bus.nodeord ? "#77dd77" : ''}
+                                size={30} />
                         </View>
-                        <Text style={style.text_busstop}>{item.nodenm}</Text>
+                        <Text style={item.nodeord === bus.nodeord ? style.text_alart : style.text_busstop}>{index}{item.nodenm}</Text>
                     </View>
                 }
                 refreshControl={

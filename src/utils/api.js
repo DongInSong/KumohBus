@@ -81,16 +81,18 @@ export const getTotalBus = async (routeid) => {
   return totalCount;
 };
 
-export const getCurrentBus = async (routeid) => {
+export const getAllLocation = async (routeid) => {
   try {
-    const res = await fetch(`${buslocation}` + routeid);
-    const resJson = await res.json();
-    const totalCount = resJson.data.response.body.totalCount; // 운행 버스 수
-    console.log('totalcount: ' + totalCount);
-    return parseInt(totalCount);
+    const res = await fetch(`${buslocation}`);
+    if (res) {
+      const resJson = await res.json();
+      const newRes = resJson.data[routeid].response.body;
+      return newRes;
+    }
+    else return null;
   }
-  catch {
-    return 0;
+  catch (e) {
+    console.log(e);
   }
 }
 
@@ -98,8 +100,9 @@ export const getLocation = async (routeid) => {
   try {
     const res = await fetch(`${buslocation}` + routeid);
     const resJson = await res.json();
-    const totalCount = resJson.data.response.body.totalCount; // 운행 버스 수
-    const newRes = resJson.data.response.body.items.item; // 정보 영역
+    console.log(resJson);
+    const totalCount = resJson.data[routeid].response.body.totalCount; // 운행 버스 수
+    const newRes = resJson.data[routeid].response.body.items.item; // 정보 영역
     console.log(totalCount);
 
     // 버스 1대 운행시 임시 배열로 생성 후 setData
@@ -128,15 +131,15 @@ export const getLocation = async (routeid) => {
 export const kakaoMapLoader = async () => {
   try {
 
-   const res = await fetch(`${kakaomap}`);
-   const resText = await res.text();
-   return resText;
-  //   .then(response => response.text())
-  //  .then((response) => {
-  //     console.log(response);
-  //      return response;
-  //  })
-  //  .catch(err => console.log(err))
+    const res = await fetch(`${kakaomap}`);
+    const resText = await res.text();
+    return resText;
+    //   .then(response => response.text())
+    //  .then((response) => {
+    //     console.log(response);
+    //      return response;
+    //  })
+    //  .catch(err => console.log(err))
 
   }
   catch (e) {
