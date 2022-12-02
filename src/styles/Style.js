@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 const style = {
     title: {
         textAlign: 'center',
@@ -83,7 +85,8 @@ const style = {
     },
     inputScreen: {
         // paddingVertical: 10,
-        display: "flex",
+        position: 'relative',
+        display: 'flex',
         // justifyContent: "center",
         // alignItems: "center",
         height: 50,
@@ -91,8 +94,10 @@ const style = {
     },
     textInput: {
         // width: "50%",
+        alignItems: 'center',
+        justifyContent: 'center',
         height: 40,
-        margin: 0,
+        // width: Dimensions.get('window').width,
         backgroundColor: '#fff',
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -113,20 +118,23 @@ const style = {
 
     // MODAL
     bottomSheetContainer: {
-        height: 200,
+        height: 360,
         backgroundColor: '#fff',
-        borderTopLeftRadius: 7,
-        borderTopRightRadius: 7,
+        // borderTopLeftRadius: 7,
+        // borderTopRightRadius: 7,
+        borderRadius:30,
+        // marginTop:130,
+        // marginBottom:30
         padding: 20
     },
     modalOverlay: {
         flex: 1,
         justifyContent: 'flex-end',
-        backgroundColor: 'rgba(0, 0, 0, 0.4)'
+        backgroundColor: 'rgba(0, 0, 0, 0.2)'
     },
     AlarmTitle: {
         fontSize: 22,
-        fontWeight: '700',
+        fontWeight: '300',
         textAlign: 'center'
     },
     modalBtn: {

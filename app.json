@@ -7,7 +7,7 @@
     "icon": "./src/assets/icons/logo_circle.jpg",
     "userInterfaceStyle": "light",
     "notification": {
-      "icon": "./src/assets/icons/blue_bus.png",
+      "icon": "./src/assets/icons/logo_circle.jpg",
       "color": "#fff"
     },
     "splash": {

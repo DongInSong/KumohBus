@@ -7,6 +7,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { getAllLocation } from "utils/api"
 import '/config/BookmarkConfig'
 import style from 'styles/Style';
+import Alarm from 'components/Alarm';
 
 const Index = ({ navigation }) => {
     const [busBookmarkData, setBusBookmarkData] = useState([]);
@@ -89,7 +90,7 @@ const Index = ({ navigation }) => {
                 ...resize,
                 bottomHeight: gestureState.moveY > (['deviceHeight'] - 40) ? 40 : resize.deviceHeight - gestureState.moveY,
                 offset: e.nativeEvent.pageY
-            }, console.log(resize['deviceHeight']))
+            })
         },
 
         onPanResponderRelease: (e, gestureState) => {
@@ -154,7 +155,7 @@ const Index = ({ navigation }) => {
             }
 
             <View
-                style={[{ height: 15 }, resize.isDividerClicked ? { backgroundColor: '#666' } : { backgroundColor: '#e2e2e2' }]}
+                style={[{ height: 12 }, resize.isDividerClicked ? { backgroundColor: '#666' } : { backgroundColor: '#e2e2e2' }]}
                 {...panResponder.panHandlers}
             >
             </View>

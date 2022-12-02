@@ -50,8 +50,9 @@ const Index = ({ navigation }) => {
   `;
 
   const Cancel = Animatable.createAnimatableComponent(styled.TouchableOpacity`
-  display: ${({ touch }) => (touch.length > 1 ? "flax" : "none")};
-  padding-left: 300;
+  display: ${({ touch }) => (touch.length > 1 ? "flex" : "none")};
+  padding-left: 330px;
+  alignSelf: 'center';
   `)
 
 
@@ -79,25 +80,29 @@ const Index = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={style.inputScreen}>
         <TextInput
+          value={searchVal}
           style={style.textInput}
           ref={searchRef}
           placeholder="정류장을 검색하세요."
-          onChangeText={(text) => searchData(text)}
+          onChangeText={(text) => { searchData(text), setSearchVal(text) }}
           touch={searchVal}
         />
         {/* <Cancel
-            touch={searchVal}
-            animation={searchVal.length > 1 ? "slideInRight" : false}
-            onPress={() => {
-              searchRef.current.value = "";
-              setSearchVal('');
-              // setData();
-            }}
-          >
-            <Text>취소</Text>
-          </Cancel> */}
+          touch={searchVal}
+          animation={searchVal.length > 1 ? "slideInRight" : false}
+          onPress={() => {
+            searchRef.current.value = "";
+            setSearchVal('');
+            setData();
+          }}
+        >
+          <MaterialCommunityIcons
+            name={'backspace'}
+            size={25}
+            color={"#666"}
+          />
+        </Cancel> */}
       </View>
-
 
       {data &&
         <FlatList

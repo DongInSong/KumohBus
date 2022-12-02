@@ -1,10 +1,11 @@
 import * as Device from 'expo-device';
 import React, { useState, useEffect, useRef } from 'react';
-import { ScrollView, Animated, Dimensions, Modal, PanResponder, Pressable, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import { Alert, ScrollView, Animated, Dimensions, Modal, PanResponder, Pressable, Button, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import { Octicons } from '@expo/vector-icons'
 import * as Notifications from 'expo-notifications';
 import { getTargetArrivalData } from "utils/api"
 import style from 'styles/Style';
+import { Picker } from '@react-native-picker/picker';
 
 const Alarm = ({ routeno, arrtime, nodeid, routeid }) => {
     const [alarm, setAlarm] = useState(false);
@@ -16,18 +17,7 @@ const Alarm = ({ routeno, arrtime, nodeid, routeid }) => {
     const responseListener = useRef();
     const screenHeight = Dimensions.get('screen').height;
     const panY = useRef(new Animated.Value(screenHeight)).current;
-
-    // state = {
-    //     query: [
-    //         { min: '5', isSelected: false },
-    //         { min: '6', isSelected: false },
-    //         { min: '7', isSelected: false },
-    //         { min: '8', isSelected: false },
-    //         { min: '9', isSelected: false },
-    //         { min: '10', isSelected: false },
-    //         { min: '15', isSelected: false }
-    //     ],
-    // }
+    const [selectedTime, setSelectedTime] = useState('420');
 
     useEffect(() => {
         if (isModalVisible) {
@@ -93,17 +83,22 @@ const Alarm = ({ routeno, arrtime, nodeid, routeid }) => {
 
     async function schedulePushNotification(routeno, arrtime) {
         try {
+            console.log(routeno + " " + arrtime + " " + selectedTime)
             await Notifications.scheduleNotificationAsync({
                 content: {
-                    title: "도착 알림",
-                    body: routeno + '번 버스가 ' + (Math.round(arrtime / 60)) + '분 뒤에 도착합니다',
+                    title: "KIT BUS",
+                    body: routeno + '번 버스가 ' + (Math.round(selectedTime / 60)) + '분 뒤에 도착합니다',
                 },
-                // trigger: { seconds: parseInt(data[0]['arrtime']) - 300 },
+                trigger : null
+                // trigger: { seconds: parseInt(data[0]['arrtime']) - selectedTime },
             });
+            Alert.alert("알림이 설정되었습니다.");
+            setSelectedTime('420');
         } catch (error) {
             console.log(error);
         }
     }
+
 
     // text: "확인", onPress: () => { schedulePushNotification(routeno, arrtime); setIsModalVisible(false); }
 
@@ -111,7 +106,7 @@ const Alarm = ({ routeno, arrtime, nodeid, routeid }) => {
     //     state = {
     //         isSelected: false,
     //       }
-        
+
     //       setSelected = () => {
     //         this.setState({
     //           isSelected: !this.state.isSelected
@@ -123,71 +118,94 @@ const Alarm = ({ routeno, arrtime, nodeid, routeid }) => {
     //             id="minButton"
     //             className={isSelected ? 'selected' : ''}
     //             style={modalInnerStyle.modalBtn}
-    //             onPress={() => {
-    //                 Alert.alert("확인", "알람을 설정하시겠습니까?",
-    //                     [
-    //                         {
-    //                             text: "확인", onPress: () => { setMin(min); setIsModalVisible(false); }
-    //                         },
-    //                         {
-    //                             text: "취소", onPress: () => setIsModalVisible(false)
-    //                         }
-    //                     ])
-    //             }}>
+                // onPress={() => {
+                //     Alert.alert("확인", "알람을 설정하시겠습니까?",
+                //         [
+                //             {
+                //                 text: "확인", onPress: () => { setMin(min); setIsModalVisible(false); }
+                //             },
+                //             {
+                //                 text: "취소", onPress: () => setIsModalVisible(false)
+                //             }
+                //         ])
+                // }}>
     //             <Text style={modalInnerStyle.btnText}>{i}분</Text>
     //         </TouchableOpacity>
     //     )
     // }
     const isAlarm = async () => {
-        setAlarm(!alarm);
         if (!alarm) {
             setIsModalVisible(!isModalVisible);
-            await getData();
-            Alert.alert("알림이 설정되었습니다.");
+            // await getData();
         }
+        setAlarm(!alarm);
     };
-        return (
-            <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 20 }} >
-                <TouchableOpacity onPress={() => isAlarm()}>
-                    <Octicons
-                        name={alarm ? 'bell-fill' : 'bell'}
-                        size={25}
-                        color={"#FBCB74"}
-                    />
-                </TouchableOpacity>
+    return (
+        <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 20 }} >
+            <TouchableOpacity onPress={() => isAlarm()}>
+                <Octicons
+                    name={alarm ? 'bell-fill' : 'bell'}
+                    size={25}
+                    color={"#FBCB74"}
+                />
+            </TouchableOpacity>
 
-                <Modal
-                    visible={isModalVisible}
-                    animationType={"slide"}
-                    transparent={true}
-                    statusBarTranslucent={true}
+            <Modal
+                visible={isModalVisible}
+                animationType={"slide"}
+                transparent={true}
+                statusBarTranslucent={true}
+            >
+                <Pressable
+                    style={style.modalOverlay}
+                    onPress={() => {setIsModalVisible(!isModalVisible), isAlarm(false), setSelectedTime('420')}}
                 >
-                    <Pressable
-                        style={style.modalOverlay}
-                        onPress={() => setIsModalVisible(!isModalVisible)}
-                    >
-                        <TouchableWithoutFeedback>
-                            <Animated.View
-                                style={{
-                                    ...style.bottomSheetContainer,
-                                    transform: [{ translateY: translateY }]
-                                }}
-                                {...panResponder.panHandlers}>
+                    <TouchableWithoutFeedback>
+                        <Animated.View
+                            style={{
+                                ...style.bottomSheetContainer,
+                                transform: [{ translateY: translateY }]
+                            }}
+                            {...panResponder.panHandlers}>
 
-                                {/* 모달에 들어갈 내용을 아래에 작성 */}
-                                <View>
-                                    <Text style={style.AlarmTitle}>알람 설정</Text>
-                                    <ScrollView horizontal={true}>
-
-                                    </ScrollView>
+                            {/* 모달에 들어갈 내용을 아래에 작성 */}
+                            <Text style={style.AlarmTitle}>알람 설정</Text>
+                                <Picker
+                                    selectedValue={selectedTime}
+                                    // numberOfLines = {4}
+                                    onValueChange={(itemValue, itemIndex) =>
+                                        setSelectedTime(itemValue)
+                                    }>
+                                    <Picker.Item label="5분 전" value="300" />
+                                    <Picker.Item label="6분 전" value="360" />
+                                    <Picker.Item label="7분 전" value="420" />
+                                    <Picker.Item label="8분 전" value="480" />
+                                    <Picker.Item label="9분 전" value="540" />
+                                    <Picker.Item label="10분 전" value="600" />
+                                </Picker>
+                                <View style={style.textContainer}>
+                                <TouchableOpacity
+                                    style={style.modalBtn}
+                                    onPress={() => {
+                                        Alert.alert("확인", "알람을 설정하시겠습니까?",
+                                            [
+                                                {
+                                                    text: "확인", onPress: () => {setIsModalVisible(false), schedulePushNotification(routeno, arrtime)}
+                                                },
+                                                {
+                                                    text: "취소", onPress: () => {setIsModalVisible(false), isAlarm(false), setSelectedTime('420')}
+                                                }
+                                            ])
+                                    }}>
+                                        <Text style={style.btnText}>설정</Text>
+                                    </TouchableOpacity>
                                 </View>
-                                
-                            </Animated.View>
-                        </TouchableWithoutFeedback>
-                    </Pressable>
-                </Modal>
-            </View>
-        );
+                        </Animated.View>
+                    </TouchableWithoutFeedback>
+                </Pressable>
+            </Modal>
+        </View>
+    );
 };
 
 
