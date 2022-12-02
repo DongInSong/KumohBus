@@ -10,7 +10,7 @@ export default function Index() {
         <Stack.Navigator>
             <Stack.Screen
                 options={{
-                    title: '홈',
+                    title: 'KIT BUS',
                     // Header 블록에 대한 스타일
                     headerStyle: { 
                       backgroundColor: '#29b6f6',

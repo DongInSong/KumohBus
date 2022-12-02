@@ -41,8 +41,8 @@ export default function Index() {
       />
 
       <Stack.Screen
-        options={{
-          title: '노선도',
+        options={({ route }) => ({
+          title: route.params.routeno + '번',
           // Header 블록에 대한 스타일
           headerStyle: {
             backgroundColor: '#29b6f6',
@@ -54,7 +54,7 @@ export default function Index() {
             fontWeight: 'bold',
             fontSize: 20,
           },
-        }}
+        })}
         name="BusRoute"
         component={BusRoute}
       />

@@ -1,0 +1,2 @@
+global.busBookmarkData = [];
+global.busStopBookmarkData = [];

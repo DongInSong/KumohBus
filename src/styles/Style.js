@@ -8,7 +8,7 @@ const style = {
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: 15,
+        paddingVertical: 17,
         borderBottomWidth: 1,
         borderColor: 'lightgrey',
     },
@@ -29,6 +29,18 @@ const style = {
         textAlign: 'center',
         textAlignVertical: 'center',
         fontSize: 15,
+    },
+    text_route: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: 17,
+    },
+    text_currentLoc: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        color: '#b53737',
+        fontWeight: 'bold',
+        fontSize: 17,
     },
 
     // CONTAINER
@@ -95,6 +107,8 @@ const style = {
         backgroundColor: '#fff',
         height: 130,
         flex: 1,
+        // alignItems: 'center',
+        // justifyContent: 'center'
     },
 
     // MODAL

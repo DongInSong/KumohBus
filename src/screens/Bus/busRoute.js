@@ -8,6 +8,7 @@ import { getAllLocation } from "utils/api"
 
 const BusRoute = ({ route }) => {
     const { routeid } = route?.params || {};
+    const { routeno } = route?.params || {};
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(true);
@@ -37,17 +38,16 @@ const BusRoute = ({ route }) => {
     };
 
     const getBus = async () => {
+        let newRes;
         const resBus = await getAllLocation(routeid);
-        if (resBus.totaCount > 0) {
-            const newRes = resBus.items.item;
-            setBus(newRes);
-            console.log(newRes);
+        if (resBus.items.item) {
+            newRes = resBus.items.item;
+            console.log(Array.isArray(newRes));
         }
         else {
-            const empty = { nodeord: 0 };
-            setBus(empty);
-            console.log(empty)
+            newRes = { nodeord:99 };
         }
+        setBus(newRes);
     }
 
     useEffect(() => {
@@ -65,7 +65,6 @@ const BusRoute = ({ route }) => {
         }
     }
 
-
     if (loading) {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -82,14 +81,28 @@ const BusRoute = ({ route }) => {
                 data={data}
                 // ref={(ref) => { this.flatListRef = ref; }}
                 renderItem={({ item, index }) =>
-                    <View style={style.route}>
+                <View style={style.route}>
                         <View style={style.iconContainer_busstop}>
-                            <MaterialCommunityIcons
-                                name={item.nodeord === bus.nodeord ? "bus" : "arrow-down-drop-circle-outline"}
-                                color={item.nodeord === bus.nodeord ? "#77dd77" : ''}
-                                size={30} />
+                            {item.nodeord === bus.nodeord &&
+                                <MaterialCommunityIcons
+                                    name="bus"
+                                    color="#77dd77"
+                                    size={30} />
+                            }
+                            {item.nodeord < bus.nodeord &&
+                                <MaterialCommunityIcons
+                                    name="arrow-down-drop-circle-outline"
+                                    color="#999"
+                                    size={30} />
+                            }
+                            {item.nodeord > bus.nodeord &&
+                                <MaterialCommunityIcons
+                                    name="arrow-down-drop-circle-outline"
+                                    color="#77dd77"
+                                    size={30} />
+                            }
                         </View>
-                        <Text style={item.nodeord === bus.nodeord ? style.text_alart : style.text_busstop}>{index}{item.nodenm}</Text>
+                        <Text style={item.nodeord === bus.nodeord ? style.text_currentLoc : style.text_route}>{item.nodenm}</Text>
                     </View>
                 }
                 refreshControl={

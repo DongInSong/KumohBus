@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { StyleSheet, RefreshControl, View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import routeData from 'config/route.json';
+import routeData from 'config/Route_kumoh.json';
 import { getAllLocation } from "utils/api"
 import Bookmark from '../../components/Bookmark';
 import style from 'styles/Style';
@@ -17,11 +17,11 @@ const Kumoh = ({ navigation }) => {
     setLoading(true);
     try {
       setRefreshing(false);
-      for(let i = 0; i < Object.keys(routeData).length; i++){
+      for (let i = 0; i < Object.keys(routeData).length; i++) {
         const res = await getAllLocation(routeData[i]['routeid']);
-        if(res){
-        totalCount[routeData[i]['routeid']] = res.totalCount;
-        console.log(routeData[i]['routeid'] + ": " + totalCount[routeData[i]['routeid']]);
+        if (res) {
+          totalCount[routeData[i]['routeid']] = res.totalCount;
+          console.log(routeData[i]['routeid'] + ": " + totalCount[routeData[i]['routeid']]);
         }
         else totalCount[routeData[i]['routeid']] = 0;
       }
@@ -52,7 +52,7 @@ const Kumoh = ({ navigation }) => {
         <FlatList
           data={routeData}
           renderItem={({ item }) =>
-            <TouchableOpacity onPress={() => navigation.navigate('BusRoute', { routeid: item.routeid })}/*ref.current.clearSearch()*/ >
+            <TouchableOpacity onPress={() => navigation.navigate('BusRoute', { routeid: item.routeid, routeno: item.routeno })}/*ref.current.clearSearch()*/ >
               <View style={style.row}>
                 {/* 아이콘 */}
                 <View style={style.iconContainer_bus}>
@@ -63,8 +63,12 @@ const Kumoh = ({ navigation }) => {
                 <Text style={style.title}>{item.routeno + ' 번  '} </Text>
                 <Text style={style.text}> {item.startnodenm + '\n ' + item.endnodenm}</Text>
 
-                {/* 즐겨찾기 버튼 */}
-                <Bookmark data={{ item, key: "busBookmarkData" }} />
+                <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 15}} >
+                  { parseInt(data[item.routeid]) > 0 ?
+                  <Text style={style.text}> {parseInt(data[item.routeid])} 대 운행중 </Text> : <Text></Text>}
+                  {/* 즐겨찾기 버튼 */}
+                  <Bookmark data={{ item, key: "busBookmarkData" }} />
+                </View>
               </View>
             </TouchableOpacity>
           }

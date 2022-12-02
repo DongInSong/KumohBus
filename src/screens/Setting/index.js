@@ -5,7 +5,7 @@ import { kakaomap } from "../../config/api";
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import { getArrivalData } from "utils/api"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import routeData from 'config/route.json';
+import routeData from 'config/Route_gumi.json';
 import Alarm from 'components/Alarm';
 import style from 'styles/Style';
 
@@ -15,7 +15,7 @@ function wait(timeout) {
   });
 }
 
-const Index = () => {
+const Index = ({ navigation }) => {
   const [mapRefreshing, setMapRefreshing] = useState(true);
   const [refreshing, setRefreshing] = useState(true);
   const webViewRef = useRef()
@@ -90,13 +90,13 @@ const Index = () => {
             data={data}
             extraData={data}
             renderItem={({ item }) =>
-              <TouchableOpacity onPress={() => console.log(item.routeno)/*클릭 이벤트(네비게이션 추가)*/}>
+              <TouchableOpacity>
                 <View style={style.row}>
 
                   {/* 아이콘 */}
                   <View style={style.iconContainer_bus}>
                     {/* routeData내에 존재하는 버스일 경우 파란색 (학교행) */}
-                    <MaterialCommunityIcons name={"bus"} size={35} color={jp.query(routeData, '$..[?(@.routeno==' + item.routeno + ')]').length > 1 ? '#10b6f6' : '#77dd77'} />
+                    <MaterialCommunityIcons name={"bus"} size={35} color={jp.query(routeData, '$..[?(@.routeid==' + item.routeid + ')]').length > 1 ? '#10b6f6' : '#77dd77'} />
                   </View>
 
                   {/* 텍스트 */}

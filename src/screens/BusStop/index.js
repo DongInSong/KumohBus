@@ -41,7 +41,7 @@ const Index = ({ navigation }) => {
 
   useEffect(() => {
     setData();
-}, []);
+  }, []);
 
   const SearchBarWrab = styled.View`
   position:relative;
@@ -55,22 +55,25 @@ const Index = ({ navigation }) => {
   `)
 
 
-  const renderItem = useCallback(({ item }) => 
-  <TouchableOpacity onPress={() => navigation.navigate('Result', { nodeid: item.nodeid, nodenm: item.nodenm })}/*ref.current.clearSearch()*/ >
-    <View style={style.row}>
+  const renderItem = useCallback(({ item }) =>
+    <TouchableOpacity onPress={() => navigation.navigate('Result', { nodeid: item.nodeid, nodenm: item.nodenm })}/*ref.current.clearSearch()*/ >
+      <View style={style.row}>
 
-      {/* 아이콘 */}
-      <View style={style.iconContainer_busstop}>
-        <MaterialCommunityIcons name={"bus-stop"} size={40} color='#77dd77' />
+        {/* 아이콘 */}
+        <View style={style.iconContainer_busstop}>
+          <MaterialCommunityIcons name={"bus-stop"} size={40} color='#77dd77' />
+        </View>
+
+        {/* 텍스트 */}
+        <Text style={style.text_busstop}>{item.nodenm}</Text>
+
+        <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 15 }} >
+          <Text></Text>
+          {/* 즐겨찾기 버튼 */}
+          <Bookmark data={{ item, key: "busStopBookmarkData" }} />
+        </View>
       </View>
-
-      {/* 텍스트 */}
-      <Text style={style.text_busstop}>{item.nodenm}</Text>
-
-      {/* 즐겨찾기 버튼 */}
-      <Bookmark data={{ item, key: "busStopBookmarkData" }} />
-    </View>
-  </TouchableOpacity>, []);
+    </TouchableOpacity>, []);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -105,12 +108,12 @@ const Index = ({ navigation }) => {
         />
       }
       {!Array.isArray(data) &&
-      <ScrollView
-        contentContainerStyle={style.textContainer}
-      >
-        <Text style={style.emptyData}>검색결과 없음</Text>
-      </ScrollView>
-}
+        <ScrollView
+          contentContainerStyle={style.textContainer}
+        >
+          <Text style={style.emptyData}>검색결과 없음</Text>
+        </ScrollView>
+      }
 
 
     </SafeAreaView>
