@@ -4,11 +4,26 @@ const style = {
     title: {
         textAlign: 'center',
         textAlignVertical: 'center',
-        // fontWeight: "bold",
+        fontWeight: "bold",
         fontSize: 20,
     },
+
+    title_time: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontWeight: "bold",
+        fontSize: 20,
+    },
+
     row: {
         flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 17,
+        borderBottomWidth: 1,
+        borderColor: 'lightgrey',
+    },
+
+    row_time: {
         alignItems: 'center',
         paddingVertical: 17,
         borderBottomWidth: 1,
@@ -21,6 +36,12 @@ const style = {
         textAlignVertical: 'center',
         // fontWeight: "bold",
         fontSize: 12,
+    },
+    text_time: {
+        textAlign: 'right',
+        textAlignVertical: 'center',
+        fontWeight: "bold",
+        fontSize: 20,
     },
     text_alart: {
         color: '#b53737',

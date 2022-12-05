@@ -1,0 +1,26 @@
+[
+    {
+        "name": "디지털관",
+        "timeByDistance": 3
+    },
+    {
+        "name": "글로벌관",
+        "timeByDistance": 3
+    },
+    {
+        "name": "테크노관",
+        "timeByDistance": 3
+    },
+    {
+        "name": "오름관",
+        "timeByDistance": 4
+    },
+    {
+        "name": "푸름관",
+        "timeByDistance": 4
+    },
+    {
+        "name": "도서관",
+        "timeByDistance": 2
+    }
+]
