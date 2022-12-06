@@ -44,6 +44,13 @@ const style = {
         fontWeight: 'bold',
         fontSize: 17,
     },
+    text_kumoh: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        color: '#29b6f6',
+        fontWeight: 'bold',
+        fontSize: 17,
+    },
 
     // CONTAINER
     textContainer: {

@@ -74,8 +74,11 @@ const Index = ({ navigation }) => {
           />
         </ScrollView>
       </View>
+      <View
+                style={{ height: 12, backgroundColor: '#e2e2e2' }}>
+            </View>
 
-      <View style={style.bookmark}>
+      <View style={{ flex: 1}}>
 
         {loading &&
           <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -90,7 +93,7 @@ const Index = ({ navigation }) => {
             data={data}
             extraData={data}
             renderItem={({ item }) =>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('BusRoute', { routeid: item.routeid, routeno: item.routeno })}>
                 <View style={style.row}>
 
                   {/* 아이콘 */}

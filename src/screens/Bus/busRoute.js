@@ -6,13 +6,15 @@ import style from '/styles/Style';
 import { routeStn } from 'config/api';
 import { getAllLocation } from "utils/api"
 
-const BusRoute = ({ route }) => {
+const BusRoute = ({ route, navigation }) => {
     const { routeid } = route?.params || {};
     const { routeno } = route?.params || {};
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(true);
     const [bus, setBus] = useState();
+    const [index, setIndex] = useState();
+    const flatList = useRef();
 
     const getData = async () => {
         await getBus();
@@ -40,12 +42,15 @@ const BusRoute = ({ route }) => {
     const getBus = async () => {
         let newRes;
         const resBus = await getAllLocation(routeid);
+        console.log(resBus.items);
         if (resBus.items.item) {
             newRes = resBus.items.item;
-            console.log(Array.isArray(newRes));
+            // console.log(Array.isArray(newRes));
+            setIndex(newRes.nodeord - 1);
         }
         else {
-            newRes = { nodeord:99 };
+            newRes = { nodeord: 99 };
+            setIndex(99);
         }
         setBus(newRes);
     }
@@ -66,7 +71,7 @@ const BusRoute = ({ route }) => {
     }
 
     if (loading) {
-        return (
+        return (    
             <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
                 <View style={style.textContainer}>
                     <Text style={style.emptyData}> 불러오는 중.. </Text>
@@ -78,36 +83,53 @@ const BusRoute = ({ route }) => {
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <FlatList
+                ref= {flatList}
                 data={data}
                 // ref={(ref) => { this.flatListRef = ref; }}
-                renderItem={({ item, index }) =>
-                <View style={style.route}>
-                        <View style={style.iconContainer_busstop}>
-                            {item.nodeord === bus.nodeord &&
-                                <MaterialCommunityIcons
-                                    name="bus"
-                                    color="#77dd77"
-                                    size={30} />
+                renderItem={({ item, index: fIndex }) =>
+                    // <TouchableOpacity onPress={() => navigation.navigate('Result', { nodeid: item.nodeid, nodenm: item.nodenm })}>
+                        <View style={style.route}>
+                            {/* {console.log(item.nodeid + " " +item.nodenm)} */}
+                            <View style={style.iconContainer_busstop}>
+                                {item.nodeord === bus.nodeord &&
+                                    <MaterialCommunityIcons
+                                        name="bus"
+                                        color="#77dd77"
+                                        size={30} />
+                                }
+                                {item.nodeord < bus.nodeord &&
+                                    <MaterialCommunityIcons
+                                        name="arrow-down-drop-circle-outline"
+                                        color="#999"
+                                        size={30} />
+                                }
+                                {item.nodeord > bus.nodeord &&
+                                    <MaterialCommunityIcons
+                                        name="arrow-down-drop-circle-outline"
+                                        color="#77dd77"
+                                        size={30} />
+                                }
+                            </View>
+                            {!item.nodenm.startsWith("금오공대") && 
+                                <Text style={item.nodeord === bus.nodeord ? style.text_currentLoc : style.text_route}>{item.nodenm}</Text>
                             }
-                            {item.nodeord < bus.nodeord &&
-                                <MaterialCommunityIcons
-                                    name="arrow-down-drop-circle-outline"
-                                    color="#999"
-                                    size={30} />
-                            }
-                            {item.nodeord > bus.nodeord &&
-                                <MaterialCommunityIcons
-                                    name="arrow-down-drop-circle-outline"
-                                    color="#77dd77"
-                                    size={30} />
+                            {item.nodenm.startsWith("금오공대") && 
+                                <Text style={item.nodeord === bus.nodeord ? style.text_currentLoc : style.text_kumoh}>{item.nodenm}</Text>
                             }
                         </View>
-                        <Text style={item.nodeord === bus.nodeord ? style.text_currentLoc : style.text_route}>{item.nodenm}</Text>
-                    </View>
+                    // </TouchableOpacity>
+                    
                 }
                 refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={getData} />
                 }
+                initialScrollIndex = {index}
+                onScrollToIndexFailed={() => {
+                    const wait = new Promise(resolve => setTimeout(resolve, 500));
+                    wait.then(() => {
+                        flatList.current?.scrollToIndex({ index: bus.nodeord - 1, animated: true });
+                    });
+                  }}
             />
         </View>
     );

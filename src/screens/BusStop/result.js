@@ -7,7 +7,7 @@ import routeData from 'config/route.json';
 import Alarm from 'components/Alarm';
 import style from 'styles/Style';
 
-const Result = ({ route }) => {
+const Result = ({ route, navigation }) => {
     const { nodeid } = route?.params || {};
     const { nodenm } = route?.params || {};
     const [data, setData] = useState([]);
@@ -64,7 +64,9 @@ const Result = ({ route }) => {
                 data={data}
                 extraData={data}
                 renderItem={({ item }) =>
-                    <TouchableOpacity onPress={() => console.log(item.routeno)/*클릭 이벤트(네비게이션 추가)*/}>
+                // {jp.query(routeData, '$..[?(@.routeno==' + item.routeno + ')]').length > 1 && 
+                    <TouchableOpacity onPress={() => {jp.query(routeData, '$..[?(@.routeno==' + item.routeno + ')]').length > 1 ? navigation.navigate('BusRoute', { routeid: item.routeid, routeno: item.routeno }) : ""}}>
+                        
                         <View style={style.row}>
 
                             {/* 아이콘 */}
@@ -91,6 +93,7 @@ const Result = ({ route }) => {
                         </View>
                     </TouchableOpacity>
                 }
+
                 keyExtractor={(item) => String(item.routeid)}
                 refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={getData} />
