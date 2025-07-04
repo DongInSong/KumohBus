@@ -127,11 +127,7 @@ const style = {
     bottomSheetContainer: {
         height: 360,
         backgroundColor: '#fff',
-        // borderTopLeftRadius: 7,
-        // borderTopRightRadius: 7,
         borderRadius:30,
-        // marginTop:130,
-        // marginBottom:30
         padding: 20
     },
     modalOverlay: {
