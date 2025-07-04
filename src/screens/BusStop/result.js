@@ -71,7 +71,6 @@ const Result = ({ route, navigation }) => {
 
                             {/* 아이콘 */}
                             <View style={style.iconContainer_bus}>
-                                {/* routeData내에 존재하는 버스일 경우 파란색 (학교행) */}
                                 <MaterialCommunityIcons name={"bus"} size={35} color={jp.query(routeData, '$..[?(@.routeno==' + item.routeno + ')]').length > 1 ? '#10b6f6' : '#77dd77'} />
                             </View>
 
