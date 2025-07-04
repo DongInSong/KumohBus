@@ -87,8 +87,4 @@ const Root = ({ navigation }) => {
     );
 }
 
-export default function Index() {
-    return (
-       <Root />
-    );
-};
+export default Root;
