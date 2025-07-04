@@ -1,5 +1,6 @@
-// const API = "https://kumohbus.herokuapp.com";
-const API = "http://172.20.10.4:8080";
+import Constants from 'expo-constants';
+
+const API = Constants.manifest.extra.API_URL;
 export const busStop = `${API}/busstop/`;
 export const routeStn = `${API}/routeStn/`;
 export const busStopArrival = `${API}/busstopArrival/`;
