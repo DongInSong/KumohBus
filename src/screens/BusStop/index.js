@@ -82,26 +82,10 @@ const Index = ({ navigation }) => {
         <TextInput
           value={searchVal}
           style={style.textInput}
-          ref={searchRef}
           placeholder="정류장을 검색하세요."
           onChangeText={(text) => { searchData(text), setSearchVal(text) }}
           touch={searchVal}
         />
-        {/* <Cancel
-          touch={searchVal}
-          animation={searchVal.length > 1 ? "slideInRight" : false}
-          onPress={() => {
-            searchRef.current.value = "";
-            setSearchVal('');
-            setData();
-          }}
-        >
-          <MaterialCommunityIcons
-            name={'backspace'}
-            size={25}
-            color={"#666"}
-          />
-        </Cancel> */}
       </View>
 
       {data &&
