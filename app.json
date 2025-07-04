@@ -1,5 +1,8 @@
 {
   "expo": {
+    "extra": {
+      "API_URL": ""
+    },
     "name": "KumohBus",
     "slug": "KumohBus",
     "version": "1.0.0",
