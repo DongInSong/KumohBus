@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Root from 'router';  
 import * as Notificatios from 'expo-notifications'
-import '/config/BookmarkConfig'
+import BookmarkConfig from './src/config/BookmarkConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
+  const [busBookmarkData, setBusBookmarkData] = useState([]);
+  const [busStopBookmarkData, setBusStopBookmarkData] = useState([]);
 
   Notificatios.setNotificationHandler({
     handleNotification: async () => ({
@@ -17,62 +19,35 @@ export default function App() {
   const getBusBookmarkData = async () => {
     try {
       const res = await AsyncStorage.getItem("busBookmarkData");
-      console.log(res);
       if (res) {
         const obj = JSON.parse(res);
         const arr = Object.keys(obj).map(function(k) {return obj[k]});
-
-        console.log("loaded");
-        global.busBookmarkData = new Array;
-        global.busBookmarkData = arr;
-        console.log(global.busBookmarkData);
+        setBusBookmarkData(arr);
       }
-      else {
-        console.log("no data");
-        global.busBookmarkData = new Array;
-      }
-
-      // const resObj = JSON.parse(res);
-      console.log("loaded: " + global.busBookmarkData);
     } catch (error) {
-      // busBookmarkData = [];
-      console.log("new arr00");
+      console.error("Error loading bus bookmark data:", error);
     }
   }
 
   const getBusStopBookmarkData = async () => {
     try {
       const res = await AsyncStorage.getItem("busStopBookmarkData");
-      console.log(res);
       if (res) {
         const obj = JSON.parse(res);
         const arr = Object.keys(obj).map(function(k) {return obj[k]});
-
-        console.log("loaded");
-        global.busStopBookmarkData = new Array;
-        global.busStopBookmarkData = arr;
-        console.log(global.busStopBookmarkData);
+        setBusStopBookmarkData(arr);
       }
-      else {
-        console.log("no data");
-        global.busStopBookmarkData = new Array;
-      }
-
-      // const resObj = JSON.parse(res);
-      console.log("loaded: " + global.busStopBookmarkData);
     } catch (error) {
-      // busBookmarkData = [];
-      console.log("new arr00");
+      
     }
   }
 
   useEffect(() => {
     getBusBookmarkData();
     getBusStopBookmarkData();
-    // AsyncStorage.clear();
   }, []);
 
   return (
-    <Root />
+    <Root busBookmarkData={busBookmarkData} busStopBookmarkData={busStopBookmarkData} />
   );
 }
